@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Panda — Diagnóstico de Necesidades · Profesionales</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --verde: #4CAF50; --negro: #1a1a2e; --azul: #42A5F5; --fondo: #f0f7f0; }
+  body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: #333; min-height: 100vh; }
+  .header { background: linear-gradient(135deg, var(--negro) 0%, #16213e 60%, #0f3460 100%); color: white; padding: 40px 24px 32px; text-align: center; }
+  .header .panda { font-size: 3rem; margin-bottom: 8px; }
+  .header h1 { font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; }
+  .header .subtitulo { font-size: 0.95rem; opacity: 0.8; max-width: 540px; margin: 0 auto 12px; line-height: 1.5; }
+  .perfil-badge { display: inline-block; background: var(--azul); color: white; padding: 6px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; }
+  .tiempo { font-size: 0.8rem; opacity: 0.6; margin-top: 10px; }
+  .container { max-width: 680px; margin: 0 auto; padding: 32px 20px 60px; }
+  .intro-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 3px 15px rgba(0,0,0,0.07); margin-bottom: 28px; border-left: 5px solid var(--azul); }
+  .intro-card p { font-size: 0.95rem; color: #555; line-height: 1.7; }
+  .seccion { background: white; border-radius: 16px; padding: 28px 24px; box-shadow: 0 3px 15px rgba(0,0,0,0.07); margin-bottom: 20px; }
+  .seccion-titulo { font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--azul); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .seccion-titulo::after { content: ''; flex: 1; height: 2px; background: #e8f4fd; border-radius: 2px; }
+  .pregunta { margin-bottom: 24px; }
+  .pregunta:last-child { margin-bottom: 0; }
+  .pregunta label { display: block; font-weight: 700; font-size: 0.95rem; color: var(--negro); margin-bottom: 10px; line-height: 1.5; }
+  .pregunta .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--azul); color: white; border-radius: 50%; font-size: 0.75rem; font-weight: 800; margin-right: 8px; }
+  .pregunta input[type="email"], .pregunta select, .pregunta textarea { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 0.9rem; color: #333; background: #fafafa; transition: border-color 0.2s; }
+  .pregunta input:focus, .pregunta select:focus, .pregunta textarea:focus { outline: none; border-color: var(--azul); background: white; }
+  .pregunta textarea { resize: vertical; min-height: 80px; }
+  .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .opcion { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 2px solid #e0e0e0; border-radius: 10px; cursor: pointer; transition: all 0.2s; background: #fafafa; font-size: 0.88rem; font-weight: 600; }
+  .opcion:hover { border-color: var(--azul); background: #e3f2fd; }
+  .opcion input { accent-color: var(--azul); width: 16px; height: 16px; }
+  .escala-likert { display: flex; gap: 8px; }
+  .likert-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+  .likert-item input { accent-color: var(--azul); width: 18px; height: 18px; }
+  .likert-item label { font-size: 0.75rem; color: #666; text-align: center; font-weight: 600; }
+  .btn-enviar { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--azul), #1565C0); color: white; border: none; border-radius: 14px; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; margin-top: 8px; transition: opacity 0.2s; }
+  .btn-enviar:hover { opacity: 0.9; }
+  .btn-enviar:disabled { opacity: 0.6; cursor: not-allowed; }
+  .nota-privacidad { text-align: center; font-size: 0.78rem; color: #999; margin-top: 16px; }
+  .agradecimiento { display: none; text-align: center; padding: 48px 24px; background: white; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .agradecimiento .icono { font-size: 4rem; margin-bottom: 16px; }
+  .agradecimiento h2 { font-size: 1.6rem; font-weight: 900; color: var(--negro); margin-bottom: 10px; }
+  .agradecimiento p { font-size: 0.95rem; color: #666; line-height: 1.7; max-width: 420px; margin: 0 auto; }
+  .error-msg { background: #ffebee; border-left: 4px solid #e53935; border-radius: 0 10px 10px 0; padding: 12px 16px; margin-top: 12px; font-size: 0.88rem; color: #c62828; display: none; }
+  @media (max-width: 500px) { .opciones-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+  🔧 CONFIGURACIÓN FORMSPREE
+  1. Ve a https://formspree.io y crea una cuenta gratuita
+  2. Crea un nuevo formulario llamado "La Panda - Profesionales"
+  3. Copia el endpoint que te dan (https://formspree.io/f/XXXXXXXX)
+  4. Reemplaza https://formspree.io/f/mqeonknw de abajo por ese endpoint
+══════════════════════════════════════════════════════ -->
+
+<div class="header">
+  <div class="panda">🐼</div>
+  <h1>La Panda — Diagnóstico de Necesidades</h1>
+  <p class="subtitulo">Estudio de necesidades del sector de la discapacidad intelectual para el desarrollo de una plataforma digital de bienestar y actividad física.</p>
+  <span class="perfil-badge">👩💼 Perfil: Profesionales del sector</span>
+  <p class="tiempo">⏱ Tiempo estimado: 5-7 minutos</p>
+</div>
+
+<div class="container">
+  <div class="intro-card">
+    <p>Este cuestionario forma parte de una <strong>investigación sobre las necesidades reales del sector</strong> para el desarrollo de La Panda, una plataforma digital adaptada para personas con discapacidad intelectual, sus familias y profesionales.<br><br>Tus respuestas son <strong>completamente anónimas y confidenciales</strong>. La información será utilizada exclusivamente con fines de investigación.<br><br><strong>Gracias por tu tiempo.</strong> Importa mucho.</p>
+  </div>
+
+  <form id="form-profesionales" action="https://formspree.io/f/mqeonknw" method="POST">
+
+    <!-- Campo oculto para identificar el formulario en Formspree -->
+    <input type="hidden" name="_subject" value="La Panda — Nueva respuesta: Profesionales">
+    <input type="hidden" name="_language" value="es">
+    <!-- Evita spam: quitar el comentario si quieres activar honeypot -->
+    <!-- <input type="text" name="_gotcha" style="display:none"> -->
+
+    <div class="seccion">
+      <div class="seccion-titulo">📋 Sección 1 · Tu perfil profesional</div>
+      <div class="pregunta"><label><span class="num">1</span>¿Cuál es tu rol profesional en el sector de la discapacidad intelectual?</label>
+        <select name="rol"><option value="">Selecciona tu rol...</option><option>Educador/a o monitor/a</option><option>Trabajador/a Social</option><option>Terapeuta Ocupacional</option><option>Psicólogo/a</option><option>Fisioterapeuta</option><option>Logopeda</option><option>Dirección o coordinación</option><option>Personal de apoyo</option><option>Otro</option></select>
+      </div>
+      <div class="pregunta"><label><span class="num">2</span>¿En qué tipo de centro o servicio trabajas actualmente? (puedes marcar varios)</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="checkbox" name="centro[]" value="Colegio de Educación Especial"> Colegio de Educación Especial</label>
+          <label class="opcion"><input type="checkbox" name="centro[]" value="Centro Ocupacional"> Centro Ocupacional</label>
+          <label class="opcion"><input type="checkbox" name="centro[]" value="Centro de Día"> Centro de Día</label>
+          <label class="opcion"><input type="checkbox" name="centro[]" value="Residencia"> Residencia</label>
+          <label class="opcion"><input type="checkbox" name="centro[]" value="Empleo con apoyo"> Empleo con apoyo</label>
+          <label class="opcion"><input type="checkbox" name="centro[]" value="Otro"> Otro</label>
+        </div>
+      </div>
+      <div class="pregunta"><label><span class="num">3</span>¿Cuántos años llevas trabajando en el sector?</label>
+        <select name="experiencia"><option value="">Selecciona...</option><option>Menos de 2 años</option><option>2 a 5 años</option><option>5 a 10 años</option><option>Más de 10 años</option></select>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">💻 Sección 2 · Herramientas digitales que usáis hoy</div>
+      <div class="pregunta"><label><span class="num">4</span>¿Tu centro utiliza alguna herramienta digital para hacer seguimiento de los usuarios?</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="Hojas Excel"> Hojas Excel o similares</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="Software de gestión"> Software de gestión</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="Registros en papel"> Registros en papel</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="App específica DI"> App específica para DI</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="No usamos ninguna"> No usamos ninguna</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="Otro"> Otro</label>
+        </div>
+      </div>
+      <div class="pregunta"><label><span class="num">5</span>¿Cómo registráis habitualmente el estado emocional o el bienestar diario de los usuarios?</label>
+        <select name="registro_emocional"><option value="">Selecciona...</option><option>Observación directa sin registro sistematizado</option><option>Registro en papel al inicio de la jornada</option><option>Software o app de registro</option><option>No lo registramos habitualmente</option><option>Otro método</option></select>
+      </div>
+      <div class="pregunta"><label><span class="num">6</span>¿Con qué frecuencia tenéis acceso a información actualizada sobre cómo llega cada usuario a la jornada?</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="radio" name="frecuencia_info" value="Casi siempre"> Casi siempre</label>
+          <label class="opcion"><input type="radio" name="frecuencia_info" value="A veces"> A veces</label>
+          <label class="opcion"><input type="radio" name="frecuencia_info" value="Raramente"> Raramente</label>
+          <label class="opcion"><input type="radio" name="frecuencia_info" value="Casi nunca"> Casi nunca</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">🎯 Sección 3 · Necesidades reales del día a día</div>
+      <div class="pregunta"><label><span class="num">7</span>¿Cuáles son las principales dificultades que encuentras en tu trabajo diario? (marca hasta 3)</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="checkbox" name="dificultades[]" value="Falta de info en tiempo real"> Falta de información en tiempo real sobre los usuarios</label>
+          <label class="opcion"><input type="checkbox" name="dificultades[]" value="Poca comunicación con familias"> Poca comunicación con las familias</label>
+          <label class="opcion"><input type="checkbox" name="dificultades[]" value="Falta herramientas digitales"> Falta de herramientas digitales adaptadas</label>
+          <label class="opcion"><input type="checkbox" name="dificultades[]" value="Poco tiempo para registros"> Poco tiempo para registros y seguimientos</label>
+          <label class="opcion"><input type="checkbox" name="dificultades[]" value="Dificultad motivar participación"> Dificultades para motivar la participación activa</label>
+          <label class="opcion"><input type="checkbox" name="dificultades[]" value="Dificultad generar informes"> Dificultad para generar informes de evolución</label>
+        </div>
+      </div>
+      <div class="pregunta"><label><span class="num">8</span>¿En qué medida crees que una app adaptada podría mejorar el seguimiento y la atención a los usuarios? (1 = Nada · 5 = Mucho)</label>
+        <div class="escala-likert">
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="1"><label>1<br>Nada</label></div>
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="2"><label>2</label></div>
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="3"><label>3<br>Algo</label></div>
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="4"><label>4</label></div>
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="5"><label>5<br>Mucho</label></div>
+        </div>
+      </div>
+      <div class="pregunta"><label><span class="num">9</span>¿Qué funcionalidades serían más útiles para ti? (marca hasta 3)</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="checkbox" name="funcionalidades[]" value="Ver estado emocional"> Ver el estado emocional del usuario al inicio del día</label>
+          <label class="opcion"><input type="checkbox" name="funcionalidades[]" value="Seguimiento actividades"> Seguimiento de actividades realizadas</label>
+          <label class="opcion"><input type="checkbox" name="funcionalidades[]" value="Canal comunicación familias"> Canal de comunicación directa con familias</label>
+          <label class="opcion"><input type="checkbox" name="funcionalidades[]" value="Informes automáticos"> Generación automática de informes de evolución</label>
+          <label class="opcion"><input type="checkbox" name="funcionalidades[]" value="Alertas comportamiento"> Alertas sobre cambios de comportamiento</label>
+          <label class="opcion"><input type="checkbox" name="funcionalidades[]" value="Registro objetivos y logros"> Registro de objetivos individuales y logros</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">🏃 Sección 4 · Actividad física y bienestar emocional</div>
+      <div class="pregunta"><label><span class="num">10</span>¿Cómo valorarías el nivel general de actividad física de los usuarios con los que trabajas?</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="radio" name="actividad_fisica" value="Muy bajo (sedentarios)"> Muy bajo (mayoritariamente sedentarios)</label>
+          <label class="opcion"><input type="radio" name="actividad_fisica" value="Bajo"> Bajo</label>
+          <label class="opcion"><input type="radio" name="actividad_fisica" value="Moderado"> Moderado</label>
+          <label class="opcion"><input type="radio" name="actividad_fisica" value="Alto"> Alto</label>
+        </div>
+      </div>
+      <div class="pregunta"><label><span class="num">11</span>¿Existen en tu centro programas específicos de actividad física o bienestar emocional?</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="checkbox" name="programas[]" value="Actividades deportivas regulares"> Actividades deportivas regulares</label>
+          <label class="opcion"><input type="checkbox" name="programas[]" value="Programa bienestar emocional"> Programa de bienestar emocional</label>
+          <label class="opcion"><input type="checkbox" name="programas[]" value="Programa ocio inclusivo"> Programa de ocio inclusivo</label>
+          <label class="opcion"><input type="checkbox" name="programas[]" value="No hay programas específicos"> No hay programas específicos</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">💬 Sección 5 · Tu voz</div>
+      <div class="pregunta"><label><span class="num">12</span>¿Hay algo que necesites en tu trabajo diario y que no existe hoy?</label>
+        <textarea name="necesidad_libre" placeholder="Cuéntanos lo que necesitas y no encuentras..."></textarea>
+      </div>
+      <div class="pregunta"><label><span class="num">13</span>¿Tu entidad estaría interesada en participar como centro piloto de La Panda? (gratuito, con datos de impacto)</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="radio" name="piloto" value="Sí, nos interesa"> ✅ Sí, nos interesa</label>
+          <label class="opcion"><input type="radio" name="piloto" value="Quizás, quiero saber más"> 🤔 Quizás, quiero saber más</label>
+          <label class="opcion"><input type="radio" name="piloto" value="No por ahora"> ❌ No por ahora</label>
+          <label class="opcion"><input type="radio" name="piloto" value="No puedo decidirlo yo"> No puedo decidirlo yo</label>
+        </div>
+      </div>
+      <div class="pregunta"><label><span class="num">14</span>Si quieres que te contactemos, deja tu correo (opcional)</label>
+        <input type="email" name="email_contacto" placeholder="tu@correo.com">
+      </div>
+    </div>
+
+    <div class="error-msg" id="error-msg">⚠️ Algo ha ido mal al enviar. Por favor, inténtalo de nuevo en unos segundos.</div>
+    <button type="submit" class="btn-enviar" id="btn-submit">Enviar mis respuestas 🐼</button>
+    <p class="nota-privacidad">🔒 Respuestas anónimas y confidenciales · Solo uso investigación · La Panda · Barcelona 2026</p>
+  </form>
+
+  <div class="agradecimiento" id="gracias">
+    <div class="icono">🐼</div>
+    <h2>¡Muchas gracias!</h2>
+    <p>Tu respuesta es muy valiosa para mejorar la atención a las personas con discapacidad intelectual.<br><br>En equipo llegamos más lejos. 💙</p>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('form-profesionales');
+  const btn = document.getElementById('btn-submit');
+  const gracias = document.getElementById('gracias');
+  const errorMsg = document.getElementById('error-msg');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Enviando... 🐼';
+    errorMsg.style.display = 'none';
+
+    try {
+      const data = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        gracias.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error('Error en el servidor');
+      }
+    } catch (err) {
+      errorMsg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Enviar mis respuestas 🐼';
+    }
+  });
+</script>
+</body>
+</html>
