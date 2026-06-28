@@ -7,42 +7,43 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --rosa: #E91E8C; --negro: #1a1a2e; --fondo: #fff5f9; }
+  :root { --verde: #4A7C59; --negro: #1C2B1E; --fondo: #f0f7f0; --amarillo: #E8D44D; }
   body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: #333; min-height: 100vh; }
-  .header { background: linear-gradient(135deg, #4a0028 0%, #880e4f 60%, #c2185b 100%); color: white; padding: 40px 24px 32px; text-align: center; }
+  .header { background: linear-gradient(135deg, var(--negro) 0%, #2d4a32 60%, #4A7C59 100%); color: white; padding: 40px 24px 32px; text-align: center; }
   .header .panda { font-size: 3rem; margin-bottom: 8px; }
   .header h1 { font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; }
   .header .subtitulo { font-size: 0.95rem; opacity: 0.85; max-width: 540px; margin: 0 auto 12px; line-height: 1.5; }
-  .perfil-badge { display: inline-block; background: rgba(255,255,255,0.25); color: white; padding: 6px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.4); }
+  .perfil-badge { display: inline-block; background: var(--amarillo); color: var(--negro); padding: 6px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; }
   .tiempo { font-size: 0.8rem; opacity: 0.6; margin-top: 10px; }
   .container { max-width: 680px; margin: 0 auto; padding: 32px 20px 60px; }
-  .intro-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 3px 15px rgba(0,0,0,0.07); margin-bottom: 28px; border-left: 5px solid var(--rosa); }
+  .intro-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 3px 15px rgba(0,0,0,0.07); margin-bottom: 28px; border-left: 5px solid var(--verde); }
   .intro-card p { font-size: 0.95rem; color: #555; line-height: 1.7; }
   .seccion { background: white; border-radius: 16px; padding: 28px 24px; box-shadow: 0 3px 15px rgba(0,0,0,0.07); margin-bottom: 20px; }
-  .seccion-titulo { font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--rosa); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-  .seccion-titulo::after { content: ''; flex: 1; height: 2px; background: #fce4ec; border-radius: 2px; }
+  .seccion-titulo { font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--verde); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .seccion-titulo::after { content: ''; flex: 1; height: 2px; background: #e8f4ed; border-radius: 2px; }
   .pregunta { margin-bottom: 24px; }
   .pregunta:last-child { margin-bottom: 0; }
-  .pregunta label { display: block; font-weight: 700; font-size: 0.95rem; color: var(--negro); margin-bottom: 10px; line-height: 1.5; }
-  .pregunta .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--rosa); color: white; border-radius: 50%; font-size: 0.75rem; font-weight: 800; margin-right: 8px; }
+  .pregunta > label { display: block; font-weight: 700; font-size: 0.95rem; color: var(--negro); margin-bottom: 10px; line-height: 1.5; }
+  .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--verde); color: white; border-radius: 50%; font-size: 0.75rem; font-weight: 800; margin-right: 8px; flex-shrink: 0; }
+  .num-star { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--amarillo); color: var(--negro); border-radius: 50%; font-size: 0.75rem; font-weight: 800; margin-right: 8px; flex-shrink: 0; }
   .pregunta input[type="email"], .pregunta select, .pregunta textarea { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 0.9rem; color: #333; background: #fafafa; transition: border-color 0.2s; }
-  .pregunta input:focus, .pregunta select:focus, .pregunta textarea:focus { outline: none; border-color: var(--rosa); background: white; }
+  .pregunta input:focus, .pregunta select:focus, .pregunta textarea:focus { outline: none; border-color: var(--verde); background: white; }
   .pregunta textarea { resize: vertical; min-height: 80px; }
   .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .opcion { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 2px solid #e0e0e0; border-radius: 10px; cursor: pointer; transition: all 0.2s; background: #fafafa; font-size: 0.88rem; font-weight: 600; }
-  .opcion:hover { border-color: var(--rosa); background: #fce4ec; }
-  .opcion input { accent-color: var(--rosa); width: 16px; height: 16px; }
+  .opcion:hover { border-color: var(--verde); background: #e8f5e9; }
+  .opcion input { accent-color: var(--verde); width: 16px; height: 16px; flex-shrink: 0; }
   .emoji-escala { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
   .emoji-opcion { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 10px; border: 2px solid #e0e0e0; border-radius: 12px; cursor: pointer; transition: all 0.2s; flex: 1; min-width: 70px; text-align: center; }
-  .emoji-opcion:hover { border-color: var(--rosa); background: #fce4ec; }
-  .emoji-opcion input { accent-color: var(--rosa); }
+  .emoji-opcion:hover { border-color: var(--verde); background: #e8f5e9; }
+  .emoji-opcion input { accent-color: var(--verde); }
   .emoji-opcion .emoji-big { font-size: 1.8rem; }
   .emoji-opcion .emoji-label { font-size: 0.72rem; font-weight: 700; color: #555; line-height: 1.3; }
   .escala-likert { display: flex; gap: 8px; }
   .likert-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
-  .likert-item input { accent-color: var(--rosa); width: 18px; height: 18px; }
+  .likert-item input { accent-color: var(--verde); width: 18px; height: 18px; }
   .likert-item label { font-size: 0.75rem; color: #666; text-align: center; font-weight: 600; }
-  .btn-enviar { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--rosa), #880e4f); color: white; border: none; border-radius: 14px; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; margin-top: 8px; transition: opacity 0.2s; }
+  .btn-enviar { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--verde), #2d4a32); color: white; border: none; border-radius: 14px; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; margin-top: 8px; transition: opacity 0.2s; }
   .btn-enviar:hover { opacity: 0.9; }
   .btn-enviar:disabled { opacity: 0.6; cursor: not-allowed; }
   .nota-privacidad { text-align: center; font-size: 0.78rem; color: #999; margin-top: 16px; }
@@ -56,37 +57,43 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════
-  🔧 CONFIGURACIÓN FORMSPREE
-  1. Ve a https://formspree.io y crea una cuenta gratuita
-  2. Crea un nuevo formulario llamado "La Panda - Familias"
-  3. Copia el endpoint que te dan (https://formspree.io/f/XXXXXXXX)
-  4. Reemplaza https://formspree.io/f/xpqebzez de abajo por ese endpoint
-══════════════════════════════════════════════════════ -->
-
 <div class="header">
   <div class="panda">🐼</div>
   <h1>La Panda — Diagnóstico de Necesidades</h1>
-  <p class="subtitulo">Queremos entender mejor cómo es el día a día de las familias con un familiar con discapacidad intelectual. Tu experiencia nos ayuda a crear algo mejor.</p>
+  <p class="subtitulo">Queremos entender mejor cómo es el día a día de las familias con un familiar con DI. Tu experiencia nos ayuda a crear algo mejor.</p>
   <span class="perfil-badge">👨👩👧 Perfil: Familias y cuidadores</span>
   <p class="tiempo">⏱ Tiempo estimado: 5-7 minutos</p>
 </div>
 
 <div class="container">
   <div class="intro-card">
-    <p>Este cuestionario es parte de una investigación para desarrollar <strong>La Panda</strong>, una app que quiere ayudar a las personas con discapacidad intelectual a estar mejor, hacer más actividad física y conectar más con su familia y profesionales.<br><br>No hay respuestas correctas o incorrectas. <strong>Lo que importa es tu experiencia real.</strong><br>Tus respuestas son <strong>completamente anónimas</strong>.</p>
+    <p>Este cuestionario es parte de una investigación para desarrollar <strong>La Panda</strong>, una app que quiere ayudar a las personas con DI a aumentar su autodeterminación, participar más en su entorno y conectar mejor con su familia y profesionales.<br><br>No hay respuestas correctas o incorrectas. <strong>Lo que importa es tu experiencia real.</strong><br>Tus respuestas son <strong>completamente anónimas</strong>.</p>
   </div>
 
-  <form id="form-familias" action="https://formspree.io/f/xpqebzez" method="POST">
+  <form id="form-familias" action="https://script.google.com/macros/s/AKfycbwCbqyGVHoCOuY9eSIMJh_CINc_JhYiXGJ3L3m0ZcrrC8mGUtCeSw5LR0YBijvrH6zu7A/exec" method="POST">
     <input type="hidden" name="_subject" value="La Panda — Nueva respuesta: Familias">
     <input type="hidden" name="_language" value="es">
 
+    <!-- S1: SOBRE TU FAMILIA -->
     <div class="seccion">
       <div class="seccion-titulo">👤 Sección 1 · Sobre tu familia</div>
-      <div class="pregunta"><label><span class="num">1</span>¿Qué familiar eres de la persona con discapacidad intelectual?</label>
-        <select name="parentesco"><option value="">Selecciona...</option><option>Madre</option><option>Padre</option><option>Hermano/a</option><option>Abuelo/a</option><option>Pareja</option><option>Tutor/a legal</option><option>Otro familiar</option></select>
+
+      <div class="pregunta">
+        <label><span class="num">1</span>¿Qué familiar eres de la persona con DI?</label>
+        <select name="parentesco">
+          <option value="">Selecciona...</option>
+          <option>Madre</option>
+          <option>Padre</option>
+          <option>Hermano/a</option>
+          <option>Abuelo/a</option>
+          <option>Pareja</option>
+          <option>Tutor/a legal</option>
+          <option>Otro familiar</option>
+        </select>
       </div>
-      <div class="pregunta"><label><span class="num">2</span>¿Cuántos años tiene tu familiar con discapacidad intelectual?</label>
+
+      <div class="pregunta">
+        <label><span class="num">2</span>¿Cuántos años tiene tu familiar con DI?</label>
         <div class="opciones-grid">
           <label class="opcion"><input type="radio" name="edad_di" value="Menos de 12 años"> Menos de 12 años</label>
           <label class="opcion"><input type="radio" name="edad_di" value="12 a 17 años"> 12 a 17 años</label>
@@ -95,16 +102,19 @@
           <label class="opcion"><input type="radio" name="edad_di" value="Más de 55 años"> Más de 55 años</label>
         </div>
       </div>
-      <div class="pregunta"><label><span class="num">★</span>¿Cuánta ayuda necesita habitualmente tu familiar para hacer cosas del día a día?</label>
+
+      <div class="pregunta">
+        <label><span class="num-star">★</span>¿Cuánta ayuda necesita habitualmente tu familiar para hacer cosas del día a día?</label>
         <div class="emoji-escala">
-          <label class="emoji-opcion"><input type="radio" name="nivel_apoyo" value="Mundo Sol — Poca ayuda, se maneja bastante solo/a"><div class="emoji-big">🌞</div><div class="emoji-label">Poca ayuda — se maneja bastante solo/a</div></label>
-          <label class="emoji-opcion"><input type="radio" name="nivel_apoyo" value="Mundo Río — Algo de ayuda, a veces necesita apoyo"><div class="emoji-big">🌊</div><div class="emoji-label">Algo de ayuda — a veces necesita apoyo</div></label>
-          <label class="emoji-opcion"><input type="radio" name="nivel_apoyo" value="Mundo Bosque — Bastante ayuda, apoyo frecuente"><div class="emoji-big">🌲</div><div class="emoji-label">Bastante ayuda — necesita apoyo frecuente</div></label>
-          <label class="emoji-opcion"><input type="radio" name="nivel_apoyo" value="Mundo Luna — Mucha ayuda, siempre necesita acompañamiento"><div class="emoji-big">🌙</div><div class="emoji-label">Mucha ayuda — siempre necesita acompañamiento</div></label>
+          <label class="emoji-opcion"><input type="radio" name="nivel_apoyo" value="Mundo Sol — Poca ayuda"><div class="emoji-big">🌻</div><div class="emoji-label">Poca ayuda — se maneja bastante solo/a</div></label>
+          <label class="emoji-opcion"><input type="radio" name="nivel_apoyo" value="Mundo Río — Algo de ayuda"><div class="emoji-big">🐟</div><div class="emoji-label">Algo de ayuda — a veces necesita apoyo</div></label>
+          <label class="emoji-opcion"><input type="radio" name="nivel_apoyo" value="Mundo Bosque — Bastante ayuda"><div class="emoji-big">🦔</div><div class="emoji-label">Bastante ayuda — apoyo frecuente</div></label>
+          <label class="emoji-opcion"><input type="radio" name="nivel_apoyo" value="Mundo Luna — Mucha ayuda"><div class="emoji-big">🦉</div><div class="emoji-label">Mucha ayuda — siempre necesita acompañamiento</div></label>
         </div>
       </div>
 
-      <div class="pregunta"><label><span class="num">3</span>¿A qué tipo de servicio o centro acude tu familiar?</label>
+      <div class="pregunta">
+        <label><span class="num">3</span>¿A qué tipo de servicio o centro acude tu familiar?</label>
         <div class="opciones-grid">
           <label class="opcion"><input type="checkbox" name="servicio[]" value="Colegio de Educación Especial"> Colegio de Educación Especial</label>
           <label class="opcion"><input type="checkbox" name="servicio[]" value="Centro Ocupacional"> Centro Ocupacional</label>
@@ -116,9 +126,12 @@
       </div>
     </div>
 
+    <!-- S2: COMUNICACIÓN -->
     <div class="seccion">
       <div class="seccion-titulo">📱 Sección 2 · Comunicación con el centro</div>
-      <div class="pregunta"><label><span class="num">4</span>¿Cómo te comunicas habitualmente con los profesionales que atienden a tu familiar?</label>
+
+      <div class="pregunta">
+        <label><span class="num">4</span>¿Cómo te comunicas habitualmente con los profesionales que atienden a tu familiar?</label>
         <div class="opciones-grid">
           <label class="opcion"><input type="checkbox" name="comunicacion[]" value="Reuniones presenciales"> Reuniones presenciales</label>
           <label class="opcion"><input type="checkbox" name="comunicacion[]" value="Llamadas telefónicas"> Llamadas telefónicas</label>
@@ -128,7 +141,9 @@
           <label class="opcion"><input type="checkbox" name="comunicacion[]" value="Nos comunicamos muy poco"> Nos comunicamos muy poco</label>
         </div>
       </div>
-      <div class="pregunta"><label><span class="num">5</span>¿Con qué frecuencia tienes información real sobre cómo ha pasado el día tu familiar en el centro?</label>
+
+      <div class="pregunta">
+        <label><span class="num">5</span>¿Con qué frecuencia tienes información real sobre cómo ha pasado el día tu familiar en el centro?</label>
         <div class="opciones-grid">
           <label class="opcion"><input type="radio" name="info_dia" value="Casi siempre"> Casi siempre</label>
           <label class="opcion"><input type="radio" name="info_dia" value="A veces"> A veces</label>
@@ -136,7 +151,9 @@
           <label class="opcion"><input type="radio" name="info_dia" value="Casi nunca"> Casi nunca</label>
         </div>
       </div>
-      <div class="pregunta"><label><span class="num">6</span>¿Cómo te sientes respecto a la información que recibes del centro?</label>
+
+      <div class="pregunta">
+        <label><span class="num">6</span>¿Cómo te sientes respecto a la información que recibes del centro?</label>
         <div class="emoji-escala">
           <label class="emoji-opcion"><input type="radio" name="sentimiento_info" value="Muy bien informado/a"><div class="emoji-big">😊</div><div class="emoji-label">Muy bien informado/a</div></label>
           <label class="emoji-opcion"><input type="radio" name="sentimiento_info" value="Suficiente"><div class="emoji-big">🙂</div><div class="emoji-label">Suficiente</div></label>
@@ -146,9 +163,12 @@
       </div>
     </div>
 
+    <!-- S3: DÍA A DÍA -->
     <div class="seccion">
       <div class="seccion-titulo">💙 Sección 3 · Día a día y bienestar</div>
-      <div class="pregunta"><label><span class="num">7</span>¿Cómo describirías el nivel de actividad física de tu familiar en su tiempo libre?</label>
+
+      <div class="pregunta">
+        <label><span class="num">7</span>¿Cómo describirías el nivel de actividad de tu familiar en su tiempo libre?</label>
         <div class="emoji-escala">
           <label class="emoji-opcion"><input type="radio" name="actividad" value="Casi nada, sedentario/a"><div class="emoji-big">🛋️</div><div class="emoji-label">Casi nada</div></label>
           <label class="emoji-opcion"><input type="radio" name="actividad" value="Algo de actividad"><div class="emoji-big">🚶</div><div class="emoji-label">Algo de actividad</div></label>
@@ -156,7 +176,9 @@
           <label class="emoji-opcion"><input type="radio" name="actividad" value="Muy activo/a"><div class="emoji-big">⚽</div><div class="emoji-label">Muy activo/a</div></label>
         </div>
       </div>
-      <div class="pregunta"><label><span class="num">8</span>¿Cuáles son las mayores dificultades para hacer actividades fuera de casa? (marca hasta 3)</label>
+
+      <div class="pregunta">
+        <label><span class="num">8</span>¿Cuáles son las mayores dificultades para hacer actividades fuera de casa? <em>(marca hasta 3)</em></label>
         <div class="opciones-grid">
           <label class="opcion"><input type="checkbox" name="dificultades_ocio[]" value="Transporte o accesibilidad"> Problemas de transporte o accesibilidad</label>
           <label class="opcion"><input type="checkbox" name="dificultades_ocio[]" value="Pocas actividades adaptadas"> Pocas actividades adaptadas cerca</label>
@@ -166,7 +188,9 @@
           <label class="opcion"><input type="checkbox" name="dificultades_ocio[]" value="Sin dificultades especiales"> No tiene dificultades especiales</label>
         </div>
       </div>
-      <div class="pregunta"><label><span class="num">9</span>¿Cómo valoras el nivel de autonomía que tiene tu familiar actualmente? (1 = Muy poca · 5 = Mucha)</label>
+
+      <div class="pregunta">
+        <label><span class="num">9</span>¿Cómo valoras el nivel de autonomía que tiene tu familiar actualmente? <em>(1 = Muy poca · 5 = Mucha)</em></label>
         <div class="escala-likert">
           <div class="likert-item"><input type="radio" name="autonomia" value="1"><label>1<br>Muy poca</label></div>
           <div class="likert-item"><input type="radio" name="autonomia" value="2"><label>2</label></div>
@@ -177,9 +201,12 @@
       </div>
     </div>
 
+    <!-- S4: TECNOLOGÍA -->
     <div class="seccion">
       <div class="seccion-titulo">📲 Sección 4 · Tecnología y apoyo</div>
-      <div class="pregunta"><label><span class="num">10</span>¿Tu familiar usa el móvil o una tablet de forma habitual?</label>
+
+      <div class="pregunta">
+        <label><span class="num">10</span>¿Tu familiar usa el móvil o una tablet de forma habitual?</label>
         <div class="opciones-grid">
           <label class="opcion"><input type="radio" name="uso_movil" value="Sí, solo/a con facilidad"> Sí, solo/a con facilidad</label>
           <label class="opcion"><input type="radio" name="uso_movil" value="Sí, con algo de ayuda"> Sí, con algo de ayuda</label>
@@ -187,7 +214,9 @@
           <label class="opcion"><input type="radio" name="uso_movil" value="No lo usa"> No lo usa</label>
         </div>
       </div>
-      <div class="pregunta"><label><span class="num">11</span>¿Qué te ayudaría más a ti como familia en una app como La Panda? (marca hasta 3)</label>
+
+      <div class="pregunta">
+        <label><span class="num">11</span>¿Qué te ayudaría más a ti como familia en una app como La Panda? <em>(marca hasta 3)</em></label>
         <div class="opciones-grid">
           <label class="opcion"><input type="checkbox" name="utilidad_familia[]" value="Ver cómo ha ido el día"> Ver cómo ha ido el día de mi familiar</label>
           <label class="opcion"><input type="checkbox" name="utilidad_familia[]" value="Enviar mensajes de apoyo"> Enviarle mensajes de apoyo y cariño</label>
@@ -197,7 +226,9 @@
           <label class="opcion"><input type="checkbox" name="utilidad_familia[]" value="Comunicarme con profesionales"> Comunicarme con los profesionales del centro</label>
         </div>
       </div>
-      <div class="pregunta"><label><span class="num">12</span>¿Cuánto te preocupa que tu familiar se sienta solo/a o aislado/a? (1 = Nada · 5 = Mucho)</label>
+
+      <div class="pregunta">
+        <label><span class="num">12</span>¿Cuánto te preocupa que tu familiar se sienta solo/a o aislado/a? <em>(1 = Nada · 5 = Mucho)</em></label>
         <div class="escala-likert">
           <div class="likert-item"><input type="radio" name="preocupacion" value="1"><label>1<br>Nada</label></div>
           <div class="likert-item"><input type="radio" name="preocupacion" value="2"><label>2</label></div>
@@ -206,27 +237,39 @@
           <div class="likert-item"><input type="radio" name="preocupacion" value="5"><label>5<br>Mucho</label></div>
         </div>
       </div>
+
+      <!-- NUEVA: CARGA DEL CUIDADOR -->
+      <div class="pregunta">
+        <label><span class="num">13</span>¿Cómo de acompañado/a te sientes tú como familia en este proceso? <em>(1 = Muy solo/a · 5 = Muy acompañado/a)</em></label>
+        <div class="escala-likert">
+          <div class="likert-item"><input type="radio" name="acompanamiento_familia" value="1"><label>1<br>Muy solo/a</label></div>
+          <div class="likert-item"><input type="radio" name="acompanamiento_familia" value="2"><label>2</label></div>
+          <div class="likert-item"><input type="radio" name="acompanamiento_familia" value="3"><label>3<br>Regular</label></div>
+          <div class="likert-item"><input type="radio" name="acompanamiento_familia" value="4"><label>4</label></div>
+          <div class="likert-item"><input type="radio" name="acompanamiento_familia" value="5"><label>5<br>Muy acompañado/a</label></div>
+        </div>
+      </div>
     </div>
 
+    <!-- S5: TU VOZ -->
     <div class="seccion">
       <div class="seccion-titulo">💬 Sección 5 · Tu voz importa</div>
-      <div class="pregunta"><label><span class="num">13</span>¿Hay algo que necesites como familia y que no encuentras en ningún lado?</label>
+
+      <div class="pregunta">
+        <label><span class="num">14</span>¿Hay algo que necesites como familia y que no encuentras en ningún lado?</label>
         <textarea name="necesidad_libre" placeholder="Cuéntanos lo que necesitas y no encuentras hoy..."></textarea>
-      </div>
-      <div class="pregunta"><label><span class="num">14</span>Si quieres que te contactemos para contarte más sobre La Panda, deja tu correo (opcional)</label>
-        <input type="email" name="email_contacto" placeholder="tu@correo.com">
       </div>
     </div>
 
     <div class="error-msg" id="error-msg">⚠️ Algo ha ido mal al enviar. Por favor, inténtalo de nuevo en unos segundos.</div>
     <button type="submit" class="btn-enviar" id="btn-submit">Enviar mis respuestas 🐼</button>
-    <p class="nota-privacidad">🔒 Respuestas anónimas y confidenciales · Solo uso investigación · La Panda · Barcelona 2026</p>
+    <p class="nota-privacidad">🔒 Respuestas anónimas y confidenciales · Solo uso investigación · © 2026 La Panda · Alba Sánchez Guerrero</p>
   </form>
 
   <div class="agradecimiento" id="gracias">
     <div class="icono">🐼</div>
     <h2>¡Gracias de corazón!</h2>
-    <p>Tu experiencia como familia es la razón por la que existe La Panda. Cada respuesta nos acerca más a crear algo que de verdad ayude.<br><br>En equipo llegamos más lejos. 💙</p>
+    <p>Tu experiencia como familia es la razón por la que existe La Panda. Cada respuesta nos acerca más a crear algo que de verdad ayude.<br><br>En equipo llegamos más lejos. 💚</p>
   </div>
 </div>
 
@@ -244,13 +287,23 @@
 
     try {
       const data = new FormData(form);
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+      const json = {};
+      data.forEach((value, key) => {
+        if (json[key]) {
+          json[key] = json[key] + ', ' + value;
+        } else {
+          json[key] = value;
+        }
       });
 
-      if (response.ok) {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: JSON.stringify(json),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const result = await response.json();
+      if (result.result === 'success') {
         form.style.display = 'none';
         gracias.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });

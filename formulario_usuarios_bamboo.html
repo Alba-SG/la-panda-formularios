@@ -7,14 +7,14 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --verde: #4CAF50; --negro: #1a1a2e; --fondo: #f0f9f0; }
+  :root { --verde: #4A7C59; --negro: #1C2B1E; --fondo: #f0f9f0; --amarillo: #E8D44D; }
   body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: #333; min-height: 100vh; font-size: 18px; }
-  .header { background: linear-gradient(135deg, var(--negro) 0%, #1b5e20 100%); color: white; padding: 40px 24px 32px; text-align: center; }
+  .header { background: linear-gradient(135deg, var(--negro) 0%, #2d4a32 60%, var(--verde) 100%); color: white; padding: 40px 24px 32px; text-align: center; }
   .header .bamboo { font-size: 5rem; display: block; margin-bottom: 12px; animation: bounce 2s ease-in-out infinite; }
   @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
   .header h1 { font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
   .header .saludo { font-size: 1.1rem; opacity: 0.9; max-width: 460px; margin: 0 auto 16px; line-height: 1.5; }
-  .perfil-badge { display: inline-block; background: var(--verde); color: white; padding: 8px 24px; border-radius: 24px; font-size: 0.9rem; font-weight: 800; }
+  .perfil-badge { display: inline-block; background: var(--amarillo); color: var(--negro); padding: 8px 24px; border-radius: 24px; font-size: 0.9rem; font-weight: 800; }
   .container { max-width: 600px; margin: 0 auto; padding: 28px 20px 60px; }
   .intro-card { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 24px; border-left: 6px solid var(--verde); }
   .intro-card p { font-size: 1rem; color: #555; line-height: 1.7; }
@@ -25,15 +25,15 @@
   .opciones-emoji { display: flex; flex-direction: column; gap: 12px; }
   .opcion-emoji { display: flex; align-items: center; gap: 16px; padding: 16px 20px; border: 3px solid #e8e8e8; border-radius: 14px; cursor: pointer; transition: all 0.2s; background: #fafafa; font-size: 1rem; font-weight: 700; }
   .opcion-emoji:hover { border-color: var(--verde); background: #e8f5e9; }
-  .opcion-emoji input { accent-color: var(--verde); width: 20px; height: 20px; }
-  .opcion-emoji .opcion-icon { font-size: 1.8rem; }
+  .opcion-emoji input { accent-color: var(--verde); width: 20px; height: 20px; flex-shrink: 0; }
+  .opcion-emoji .opcion-icon { font-size: 1.8rem; flex-shrink: 0; }
   .opcion-emoji .opcion-texto { flex: 1; line-height: 1.3; }
   .opcion-emoji .opcion-desc { font-size: 0.82rem; font-weight: 600; color: #888; margin-top: 2px; }
   .opciones-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .opcion-grid { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border: 3px solid #e8e8e8; border-radius: 14px; cursor: pointer; transition: all 0.2s; background: #fafafa; font-size: 0.95rem; font-weight: 700; }
   .opcion-grid:hover { border-color: var(--verde); background: #e8f5e9; }
-  .opcion-grid input { accent-color: var(--verde); width: 18px; height: 18px; }
-  .opcion-grid .g-icon { font-size: 1.5rem; }
+  .opcion-grid input { accent-color: var(--verde); width: 18px; height: 18px; flex-shrink: 0; }
+  .opcion-grid .g-icon { font-size: 1.5rem; flex-shrink: 0; }
   .escala-visual { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
   .escala-item { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 10px; border: 3px solid #e8e8e8; border-radius: 14px; cursor: pointer; transition: all 0.2s; flex: 1; min-width: 65px; background: #fafafa; }
   .escala-item:hover { border-color: var(--verde); background: #e8f5e9; }
@@ -43,7 +43,7 @@
   textarea { width: 100%; padding: 14px 18px; border: 3px solid #e0e0e0; border-radius: 14px; font-family: 'Nunito', sans-serif; font-size: 1rem; color: #333; background: #fafafa; resize: vertical; min-height: 80px; }
   textarea:focus { outline: none; border-color: var(--verde); background: white; }
   .ayuda-texto { font-size: 0.85rem; color: #888; font-style: italic; margin-top: 8px; line-height: 1.5; }
-  .btn-enviar { width: 100%; padding: 20px; background: linear-gradient(135deg, var(--verde), #2e7d32); color: white; border: none; border-radius: 18px; font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 900; cursor: pointer; margin-top: 8px; transition: all 0.2s; }
+  .btn-enviar { width: 100%; padding: 20px; background: linear-gradient(135deg, var(--verde), #2d4a32); color: white; border: none; border-radius: 18px; font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 900; cursor: pointer; margin-top: 8px; transition: all 0.2s; }
   .btn-enviar:hover { opacity: 0.92; }
   .btn-enviar:disabled { opacity: 0.6; cursor: not-allowed; }
   .nota-privacidad { text-align: center; font-size: 0.8rem; color: #aaa; margin-top: 16px; }
@@ -57,32 +57,28 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════════════════
-  🔧 CONFIGURACIÓN FORMSPREE
-  1. Ve a https://formspree.io y crea una cuenta gratuita
-  2. Crea un nuevo formulario llamado "La Panda - Usuarios"
-  3. Copia el endpoint que te dan (https://formspree.io/f/XXXXXXXX)
-  4. Reemplaza https://formspree.io/f/mjgdlvde de abajo por ese endpoint
-══════════════════════════════════════════════════════ -->
-
 <div class="header">
   <span class="bamboo">🐼</span>
   <h1>¡Hola! Soy Bamboo</h1>
   <p class="saludo">Quiero conocerte mejor para poder ayudarte. ¿Me cuentas un poquito sobre ti? Es fácil y rápido 😊</p>
-  <span class="perfil-badge">🧑 Perfil: Personas con discapacidad intelectual</span>
+  <span class="perfil-badge">🧑 Perfil: Personas con DI</span>
 </div>
 
 <div class="container">
   <div class="intro-card">
-    <p>Este cuestionario es para <strong>La Panda</strong>, una app que estamos creando para ti. Queremos saber qué te gusta, qué necesitas y cómo podemos ayudarte mejor.<br><br><strong>No hay respuestas buenas ni malas.</strong> Solo di lo que piensas de verdad. 🐼💙</p>
+    <p>Este cuestionario es para <strong>La Panda</strong>, una app que estamos creando para ti. Queremos saber qué te gusta, qué necesitas y cómo podemos ayudarte mejor.<br><br><strong>No hay respuestas buenas ni malas.</strong> Solo di lo que piensas de verdad. 🐼💚</p>
   </div>
 
-  <form id="form-usuarios" action="https://formspree.io/f/mjgdlvde" method="POST">
+  <form id="form-usuarios" action="https://script.google.com/macros/s/AKfycbzXCL7wrGwclYDIB6cCN04olJTj7udxx41fDJGt58hIQ6sKequkDLZNk6D5ZXr2T3FI/exec" method="POST">
     <input type="hidden" name="_subject" value="La Panda — Nueva respuesta: Usuarios">
     <input type="hidden" name="_language" value="es">
 
+    <!-- P1: BIENESTAR GENERAL -->
     <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">Primero lo más importante... ¿Cómo te sientes hoy en general con tu vida?</div></div>
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">Primero lo más importante... ¿Cómo te sientes hoy en general con tu vida?</div>
+      </div>
       <div class="opciones-emoji">
         <label class="opcion-emoji"><input type="radio" name="bienestar_general" value="Muy bien — Me siento feliz"><div class="opcion-icon">😄</div><div class="opcion-texto">Muy bien<div class="opcion-desc">Me siento feliz y contento/a</div></div></label>
         <label class="opcion-emoji"><input type="radio" name="bienestar_general" value="Bien — Las cosas van bastante bien"><div class="opcion-icon">🙂</div><div class="opcion-texto">Bien<div class="opcion-desc">Las cosas van bastante bien</div></div></label>
@@ -91,32 +87,30 @@
       </div>
     </div>
 
+    <!-- P2: NIVEL APOYO — iconos actualizados a los 4 Mundos reales -->
     <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">¿Cuánta ayuda necesitas normalmente para hacer cosas del día a día?</div></div>
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">¿Cuánta ayuda necesitas normalmente para hacer cosas del día a día?</div>
+      </div>
       <div class="opciones-emoji">
-        <label class="opcion-emoji"><input type="radio" name="nivel_apoyo" value="Mundo Sol — Me manejo bastante solo/a"><div class="opcion-icon">🌞</div><div class="opcion-texto">Poca ayuda<div class="opcion-desc">Me manejo bastante solo/a</div></div></label>
-        <label class="opcion-emoji"><input type="radio" name="nivel_apoyo" value="Mundo Río — A veces necesito que me echen una mano"><div class="opcion-icon">🌊</div><div class="opcion-texto">Algo de ayuda<div class="opcion-desc">A veces necesito que me echen una mano</div></div></label>
-        <label class="opcion-emoji"><input type="radio" name="nivel_apoyo" value="Mundo Bosque — Necesito apoyo frecuente"><div class="opcion-icon">🌲</div><div class="opcion-texto">Bastante ayuda<div class="opcion-desc">Necesito apoyo frecuente</div></div></label>
-        <label class="opcion-emoji"><input type="radio" name="nivel_apoyo" value="Mundo Luna — Siempre necesito acompañamiento"><div class="opcion-icon">🌙</div><div class="opcion-texto">Mucha ayuda<div class="opcion-desc">Siempre necesito acompañamiento</div></div></label>
+        <label class="opcion-emoji"><input type="radio" name="nivel_apoyo" value="Mundo Sol — Me manejo bastante solo/a"><div class="opcion-icon">🌻</div><div class="opcion-texto">Poca ayuda<div class="opcion-desc">Me manejo bastante solo/a</div></div></label>
+        <label class="opcion-emoji"><input type="radio" name="nivel_apoyo" value="Mundo Río — A veces necesito que me echen una mano"><div class="opcion-icon">🐟</div><div class="opcion-texto">Algo de ayuda<div class="opcion-desc">A veces necesito que me echen una mano</div></div></label>
+        <label class="opcion-emoji"><input type="radio" name="nivel_apoyo" value="Mundo Bosque — Necesito apoyo frecuente"><div class="opcion-icon">🦔</div><div class="opcion-texto">Bastante ayuda<div class="opcion-desc">Necesito apoyo frecuente</div></div></label>
+        <label class="opcion-emoji"><input type="radio" name="nivel_apoyo" value="Mundo Luna — Siempre necesito acompañamiento"><div class="opcion-icon">🦉</div><div class="opcion-texto">Mucha ayuda<div class="opcion-desc">Siempre necesito acompañamiento</div></div></label>
       </div>
     </div>
 
+    <!-- P3: GUSTOS -->
     <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">¿Cuánto te mueves o haces ejercicio en tu tiempo libre?</div></div>
-      <div class="opciones-emoji">
-        <label class="opcion-emoji"><input type="radio" name="actividad_fisica" value="Mucho — Hago deporte casi todos los días"><div class="opcion-icon">⚽</div><div class="opcion-texto">Mucho<div class="opcion-desc">Hago deporte o camino casi todos los días</div></div></label>
-        <label class="opcion-emoji"><input type="radio" name="actividad_fisica" value="Algo — Salgo y me muevo algunos días"><div class="opcion-icon">🚶</div><div class="opcion-texto">Algo<div class="opcion-desc">Salgo y me muevo algunos días</div></div></label>
-        <label class="opcion-emoji"><input type="radio" name="actividad_fisica" value="Poco — Mayormente estoy en casa"><div class="opcion-icon">🛋️</div><div class="opcion-texto">Poco<div class="opcion-desc">Mayormente estoy en casa</div></div></label>
-        <label class="opcion-emoji"><input type="radio" name="actividad_fisica" value="Casi nada — No suelo hacer actividades fuera"><div class="opcion-icon">😴</div><div class="opcion-texto">Casi nada<div class="opcion-desc">No suelo hacer actividades fuera</div></div></label>
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">¿Qué te gusta hacer en tu tiempo libre? Puedes marcar varias cosas 😊</div>
       </div>
-    </div>
-
-    <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">¿Qué te gusta hacer en tu tiempo libre? Puedes marcar varias cosas 😊</div></div>
       <div class="opciones-grid2">
         <label class="opcion-grid"><input type="checkbox" name="gustos[]" value="Deporte"><div class="g-icon">⚽</div> Deporte</label>
         <label class="opcion-grid"><input type="checkbox" name="gustos[]" value="Música"><div class="g-icon">🎵</div> Música</label>
-        <label class="opcion-grid"><input type="checkbox" name="gustos[]" value="Bailar"><div class="g-icon">💃</div> Bailar</label>
+        <label class="opcion-grid"><input type="checkbox" name="gustos[]" value="Bailar"><div class="g-icon">🕺</div> Bailar</label>
         <label class="opcion-grid"><input type="checkbox" name="gustos[]" value="Pasear"><div class="g-icon">🌳</div> Pasear</label>
         <label class="opcion-grid"><input type="checkbox" name="gustos[]" value="Dibujar o pintar"><div class="g-icon">🎨</div> Dibujar o pintar</label>
         <label class="opcion-grid"><input type="checkbox" name="gustos[]" value="Leer o ver vídeos"><div class="g-icon">📚</div> Leer o ver vídeos</label>
@@ -127,8 +121,12 @@
       </div>
     </div>
 
+    <!-- P4: USO MÓVIL -->
     <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">¿Usas un móvil o una tablet?</div></div>
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">¿Usas un móvil o una tablet?</div>
+      </div>
       <div class="opciones-emoji">
         <label class="opcion-emoji"><input type="radio" name="uso_movil" value="Sí, solo/a sin ayuda"><div class="opcion-icon">📱</div><div class="opcion-texto">Sí, solo/a<div class="opcion-desc">Lo uso sin ayuda y me gusta mucho</div></div></label>
         <label class="opcion-emoji"><input type="radio" name="uso_movil" value="Sí, con ayuda de alguien"><div class="opcion-icon">🤝</div><div class="opcion-texto">Sí, con ayuda<div class="opcion-desc">A veces me ayuda alguien</div></div></label>
@@ -137,8 +135,12 @@
       </div>
     </div>
 
+    <!-- P5: CONEXIÓN SOCIAL -->
     <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">¿Sientes que tienes suficientes amigos o personas con las que hacer cosas?</div></div>
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">¿Sientes que tienes suficientes amigos o personas con las que hacer cosas?</div>
+      </div>
       <div class="escala-visual">
         <label class="escala-item"><input type="radio" name="conexion_social" value="1 — Me siento muy solo/a"><div class="escala-emoji">😢</div><div class="escala-texto">Me siento muy solo/a</div></label>
         <label class="escala-item"><input type="radio" name="conexion_social" value="2 — Podría tener más"><div class="escala-emoji">😕</div><div class="escala-texto">Podría tener más</div></label>
@@ -148,8 +150,12 @@
       </div>
     </div>
 
+    <!-- P6: AUTONOMÍA -->
     <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">¿Puedes elegir lo que quieres hacer en tu día a día?</div></div>
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">¿Puedes elegir lo que quieres hacer en tu día a día?</div>
+      </div>
       <div class="opciones-emoji">
         <label class="opcion-emoji"><input type="radio" name="autonomia" value="Sí, puedo elegir muchas cosas"><div class="opcion-icon">🙋</div><div class="opcion-texto">Sí, puedo elegir muchas cosas<div class="opcion-desc">Decido bastante sobre mi vida</div></div></label>
         <label class="opcion-emoji"><input type="radio" name="autonomia" value="Algunas cosas sí"><div class="opcion-icon">🤷</div><div class="opcion-texto">Algunas cosas sí<div class="opcion-desc">Puedo elegir en algunas cosas pero no en todo</div></div></label>
@@ -158,8 +164,30 @@
       </div>
     </div>
 
+    <!-- P7: NUEVA — QUÉ LE GUSTARÍA HACER MÁS (reemplaza actividad física) -->
     <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">¿Qué te gustaría tener en una app para tu móvil? Puedes marcar varias ✨</div></div>
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">¿Hay algo que te gustaría hacer más pero ahora no puedes? Puedes marcar varios 🌟</div>
+      </div>
+      <div class="opciones-grid2">
+        <label class="opcion-grid"><input type="checkbox" name="quiero_mas[]" value="Salir más con amigos/as"><div class="g-icon">👫</div> Salir más con amigos/as</label>
+        <label class="opcion-grid"><input type="checkbox" name="quiero_mas[]" value="Hacer más deporte"><div class="g-icon">🏃</div> Hacer más deporte</label>
+        <label class="opcion-grid"><input type="checkbox" name="quiero_mas[]" value="Conocer lugares nuevos"><div class="g-icon">🗺️</div> Conocer lugares nuevos</label>
+        <label class="opcion-grid"><input type="checkbox" name="quiero_mas[]" value="Aprender cosas nuevas"><div class="g-icon">📖</div> Aprender cosas nuevas</label>
+        <label class="opcion-grid"><input type="checkbox" name="quiero_mas[]" value="Decidir más yo solo/a"><div class="g-icon">⭐</div> Decidir más yo solo/a</label>
+        <label class="opcion-grid"><input type="checkbox" name="quiero_mas[]" value="Trabajar o tener una tarea"><div class="g-icon">💼</div> Trabajar o tener una tarea</label>
+        <label class="opcion-grid"><input type="checkbox" name="quiero_mas[]" value="Hacer actividades en grupo"><div class="g-icon">🤸</div> Actividades en grupo</label>
+        <label class="opcion-grid"><input type="checkbox" name="quiero_mas[]" value="Otras cosas"><div class="g-icon">✨</div> Otras cosas</label>
+      </div>
+    </div>
+
+    <!-- P8: DESEOS APP -->
+    <div class="tarjeta">
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">¿Qué te gustaría tener en una app para tu móvil? Puedes marcar varias ✨</div>
+      </div>
       <div class="opciones-grid2">
         <label class="opcion-grid"><input type="checkbox" name="deseos_app[]" value="Retos divertidos"><div class="g-icon">🎯</div> Retos divertidos</label>
         <label class="opcion-grid"><input type="checkbox" name="deseos_app[]" value="Ganar medallas"><div class="g-icon">🏅</div> Ganar medallas</label>
@@ -168,25 +196,43 @@
         <label class="opcion-grid"><input type="checkbox" name="deseos_app[]" value="Ver lugares cerca"><div class="g-icon">🗺️</div> Ver lugares cerca</label>
         <label class="opcion-grid"><input type="checkbox" name="deseos_app[]" value="Que me hable con voz"><div class="g-icon">🔊</div> Que me hable con voz</label>
         <label class="opcion-grid"><input type="checkbox" name="deseos_app[]" value="Hacer cosas en equipo"><div class="g-icon">👫</div> Hacer cosas en equipo</label>
-        <label class="opcion-grid"><input type="checkbox" name="deseos_app[]" value="Actividades de baile"><div class="g-icon">💃</div> Actividades de baile</label>
+        <label class="opcion-grid"><input type="checkbox" name="deseos_app[]" value="Actividades de baile"><div class="g-icon">🕺</div> Actividades de baile</label>
       </div>
     </div>
 
+    <!-- P9: NUEVA — BAMBOO MASCOTA -->
     <div class="tarjeta">
-      <div class="bamboo-habla"><div class="panda-small">🐼</div><div class="burbuja">¿Hay algo más que quieras contarme? ¡Me encanta escucharte! 🌟</div></div>
-      <textarea name="mensaje_libre" placeholder="Escribe aquí lo que quieras..."></textarea>
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">Yo soy Bamboo, tu mascota 🐼 Si haces cosas, ¡yo crezco y mejoro contigo! ¿Te gustaría tener una mascota así?</div>
+      </div>
+      <div class="opciones-emoji">
+        <label class="opcion-emoji"><input type="radio" name="bamboo_mascota" value="Sí, me encanta la idea"><div class="opcion-icon">🥰</div><div class="opcion-texto">¡Sí, me encanta!<div class="opcion-desc">Me gustaría mucho tener una mascota así</div></div></label>
+        <label class="opcion-emoji"><input type="radio" name="bamboo_mascota" value="Creo que sí"><div class="opcion-icon">🙂</div><div class="opcion-texto">Creo que sí<div class="opcion-desc">Me parece buena idea</div></div></label>
+        <label class="opcion-emoji"><input type="radio" name="bamboo_mascota" value="No sé, tendría que verlo"><div class="opcion-icon">🤔</div><div class="opcion-texto">No sé, tendría que verlo<div class="opcion-desc">Necesito verlo para saber si me gusta</div></div></label>
+        <label class="opcion-emoji"><input type="radio" name="bamboo_mascota" value="No me llama mucho la atención"><div class="opcion-icon">😐</div><div class="opcion-texto">No me llama mucho<div class="opcion-desc">Preferiría otra cosa</div></div></label>
+      </div>
+    </div>
+
+    <!-- P10: TEXTO LIBRE — pregunta concreta -->
+    <div class="tarjeta">
+      <div class="bamboo-habla">
+        <div class="panda-small">🐼</div>
+        <div class="burbuja">¿Hay algo que te gustaría poder hacer y ahora no puedes? ¡Me encanta escucharte! 🌟</div>
+      </div>
+      <textarea name="mensaje_libre" placeholder="Cuéntame aquí lo que quieras..."></textarea>
       <p class="ayuda-texto">💡 Si necesitas ayuda para responder, puedes pedírsela a alguien de confianza.</p>
     </div>
 
     <div class="error-msg" id="error-msg">⚠️ Algo ha ido mal al enviar. Por favor, inténtalo de nuevo.</div>
     <button type="submit" class="btn-enviar" id="btn-submit">¡Listo! Enviar mis respuestas 🐼✨</button>
-    <p class="nota-privacidad">🔒 Tus respuestas son privadas · Nadie las verá con tu nombre · La Panda · Barcelona 2026</p>
+    <p class="nota-privacidad">🔒 Tus respuestas son privadas · Nadie las verá con tu nombre · © 2026 La Panda · Alba Sánchez Guerrero</p>
   </form>
 
   <div class="agradecimiento" id="gracias">
     <span class="gran-panda">🐼</span>
     <h2>¡Genial! ¡Lo has conseguido! 🎉</h2>
-    <p>Gracias por contarme tus cosas. Eres muy importante para hacer que La Panda sea la mejor app del mundo.<br><br>¡Nos vemos pronto! 💙✨</p>
+    <p>Gracias por contarme tus cosas. Eres muy importante para hacer que La Panda sea la mejor app del mundo.<br><br>¡Nos vemos pronto! 💚✨</p>
   </div>
 </div>
 
@@ -204,18 +250,28 @@
 
     try {
       const data = new FormData(form);
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+      const json = {};
+      data.forEach((value, key) => {
+        if (json[key]) {
+          json[key] = json[key] + ', ' + value;
+        } else {
+          json[key] = value;
+        }
       });
 
-      if (response.ok) {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: JSON.stringify(json),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const result = await response.json();
+      if (result.result === 'success') {
         form.style.display = 'none';
         gracias.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        throw new Error('Error');
+        throw new Error('Error en el servidor');
       }
     } catch (err) {
       errorMsg.style.display = 'block';
