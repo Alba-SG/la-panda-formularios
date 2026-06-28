@@ -277,44 +277,23 @@
   const form = document.getElementById('form-familias');
   const btn = document.getElementById('btn-submit');
   const gracias = document.getElementById('gracias');
-  const errorMsg = document.getElementById('error-msg');
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  // Crear iframe oculto para recibir la respuesta sin CORS
+  const iframe = document.createElement('iframe');
+  iframe.name = 'hidden-iframe';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  form.target = 'hidden-iframe';
+
+  iframe.addEventListener('load', function() {
+    form.style.display = 'none';
+    gracias.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  form.addEventListener('submit', function() {
     btn.disabled = true;
     btn.textContent = 'Enviando... 🐼';
-    errorMsg.style.display = 'none';
-
-    var data = new FormData(form);
-    var params = new URLSearchParams();
-    data.forEach(function(value, key) {
-      if (params.has(key)) {
-        params.set(key, params.get(key) + ', ' + value);
-      } else {
-        params.append(key, value);
-      }
-    });
-
-    fetch(form.action, {
-      method: 'POST',
-      body: params,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    })
-    .then(function(response) { return response.json(); })
-    .then(function(result) {
-      if (result.result === 'success') {
-        form.style.display = 'none';
-        gracias.style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        throw new Error('Error en el servidor');
-      }
-    })
-    .catch(function() {
-      errorMsg.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Enviar mis respuestas 🐼';
-    });
   });
 </script>
 </body>
