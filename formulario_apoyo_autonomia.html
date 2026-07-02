@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Panda — Diagnóstico de Necesidades · Apoyo a la Autonomía</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --verde: #4A7C59; --negro: #1C2B1E; --fondo: #f0f7f0; --amarillo: #E8D44D; --terra: #C4956A; }
+  body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: #333; min-height: 100vh; }
+  .header { background: linear-gradient(135deg, var(--negro) 0%, #2d4a32 60%, #4A7C59 100%); color: white; padding: 40px 24px 32px; text-align: center; }
+  .header .panda { font-size: 3rem; margin-bottom: 8px; }
+  .header h1 { font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; }
+  .header .subtitulo { font-size: 0.95rem; opacity: 0.8; max-width: 540px; margin: 0 auto 12px; line-height: 1.5; }
+  .perfil-badge { display: inline-block; background: var(--amarillo); color: var(--negro); padding: 6px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; }
+  .tiempo { font-size: 0.8rem; opacity: 0.6; margin-top: 10px; }
+  .container { max-width: 680px; margin: 0 auto; padding: 32px 20px 60px; }
+  .intro-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 3px 15px rgba(0,0,0,0.07); margin-bottom: 28px; border-left: 5px solid var(--verde); }
+  .intro-card p { font-size: 0.95rem; color: #555; line-height: 1.7; }
+  .seccion { background: white; border-radius: 16px; padding: 28px 24px; box-shadow: 0 3px 15px rgba(0,0,0,0.07); margin-bottom: 20px; }
+  .seccion-titulo { font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--verde); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .seccion-titulo::after { content: ''; flex: 1; height: 2px; background: #e8f4ed; border-radius: 2px; }
+  .pregunta { margin-bottom: 24px; }
+  .pregunta:last-child { margin-bottom: 0; }
+  .pregunta > label { display: block; font-weight: 700; font-size: 0.95rem; color: var(--negro); margin-bottom: 10px; line-height: 1.5; }
+  .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--verde); color: white; border-radius: 50%; font-size: 0.75rem; font-weight: 800; margin-right: 8px; flex-shrink: 0; }
+  .pregunta input[type="email"], .pregunta select, .pregunta textarea { width: 100%; padding: 12px 16px; border: 2px solid #e0e0e0; border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 0.9rem; color: #333; background: #fafafa; transition: border-color 0.2s; }
+  .pregunta input:focus, .pregunta select:focus, .pregunta textarea:focus { outline: none; border-color: var(--verde); background: white; }
+  .pregunta textarea { resize: vertical; min-height: 80px; }
+  .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .opciones-col { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .opcion { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 2px solid #e0e0e0; border-radius: 10px; cursor: pointer; transition: all 0.2s; background: #fafafa; font-size: 0.88rem; font-weight: 600; }
+  .opcion:hover { border-color: var(--verde); background: #e8f5e9; }
+  .opcion input { accent-color: var(--verde); width: 16px; height: 16px; flex-shrink: 0; }
+  .escala-likert { display: flex; gap: 8px; }
+  .likert-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+  .likert-item input { accent-color: var(--verde); width: 18px; height: 18px; }
+  .likert-item label { font-size: 0.75rem; color: #666; text-align: center; font-weight: 600; }
+  .btn-enviar { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--verde), #2d4a32); color: white; border: none; border-radius: 14px; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800; cursor: pointer; margin-top: 8px; transition: opacity 0.2s; }
+  .btn-enviar:hover { opacity: 0.9; }
+  .btn-enviar:disabled { opacity: 0.6; cursor: not-allowed; }
+  .nota-privacidad { text-align: center; font-size: 0.78rem; color: #999; margin-top: 16px; }
+  .agradecimiento { display: none; text-align: center; padding: 48px 24px; background: white; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .agradecimiento .icono { font-size: 4rem; margin-bottom: 16px; }
+  .agradecimiento h2 { font-size: 1.6rem; font-weight: 900; color: var(--negro); margin-bottom: 10px; }
+  .agradecimiento p { font-size: 0.95rem; color: #666; line-height: 1.7; max-width: 420px; margin: 0 auto; }
+  .error-msg { background: #ffebee; border-left: 4px solid #e53935; border-radius: 0 10px 10px 0; padding: 12px 16px; margin-top: 12px; font-size: 0.88rem; color: #c62828; display: none; }
+  @media (max-width: 500px) { .opciones-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="panda">🐼</div>
+  <h1>La Panda — Diagnóstico de Necesidades</h1>
+  <p class="subtitulo">Investigación sobre las necesidades reales del sector para el desarrollo de una plataforma digital de autodeterminación, proyecto de vida y participación social para personas con DI.</p>
+  <span class="perfil-badge">🤝 Perfil: Apoyo a la Autonomía y Proyecto de Vida</span>
+  <p class="tiempo">⏱ Tiempo estimado: 6-8 minutos</p>
+</div>
+
+<div class="container">
+  <div class="intro-card">
+    <p>Este cuestionario está dirigido a <strong>profesionales que trabajan en autodeterminación, proyecto de vida, vida independiente y apoyo comunitario</strong> para personas con discapacidad intelectual.<br><br>Tus respuestas son <strong>completamente anónimas y confidenciales</strong>. La información será utilizada exclusivamente con fines de investigación para desarrollar La Panda.<br><br><strong>Gracias por tu tiempo y tu experiencia.</strong> Es imprescindible.</p>
+  </div>
+
+  <form id="form-apoyo-autonomia" action="https://script.google.com/macros/s/AKfycbx7NzBt8HUQeqJK7Uz8M_qfjdbuf_lBLUBLN-a-n5mV3D64CKdzVCUsR_NrvQP21wFY/exec" method="POST">
+    <input type="hidden" name="_subject" value="La Panda — Nueva respuesta: Apoyo Autonomía">
+    <input type="hidden" name="_language" value="es">
+
+    <!-- S1: PERFIL -->
+    <div class="seccion">
+      <div class="seccion-titulo">📋 Sección 1 · Tu perfil profesional</div>
+      <div class="pregunta">
+        <label><span class="num">1</span>¿Cuál es tu rol en la entidad?</label>
+        <select name="rol">
+          <option value="">Selecciona tu rol...</option>
+          <option>Coordinador/a territorial o de área</option>
+          <option>Técnico/a de apoyo a la autonomía</option>
+          <option>Trabajador/a Social</option>
+          <option>Psicólogo/a</option>
+          <option>Educador/a social</option>
+          <option>Responsable de proyectos</option>
+          <option>Dirección</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">2</span>¿Qué tipo de entidad representa mejor tu trabajo?</label>
+        <select name="tipo_entidad">
+          <option value="">Selecciona...</option>
+          <option>Fundación de apoyo a la autonomía y vida independiente</option>
+          <option>Asociación de personas con DI y familias</option>
+          <option>Entidad de apoyo comunitario</option>
+          <option>Servicio de orientación y planificación centrada en la persona</option>
+          <option>Administración pública</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">3</span>¿Cuántos años llevas trabajando en el sector?</label>
+        <select name="experiencia">
+          <option value="">Selecciona...</option>
+          <option>Menos de 2 años</option>
+          <option>2 a 5 años</option>
+          <option>5 a 10 años</option>
+          <option>Más de 10 años</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- S2: PROYECTO DE VIDA Y AUTODETERMINACIÓN -->
+    <div class="seccion">
+      <div class="seccion-titulo">🌍 Sección 2 · Proyecto de vida y autodeterminación</div>
+      <div class="pregunta">
+        <label><span class="num">4</span>¿Cómo acompañáis actualmente el proyecto de vida de las personas con DI? <em>(puedes marcar varios)</em></label>
+        <div class="opciones-col">
+          <label class="opcion"><input type="checkbox" name="metodos_pv[]" value="Planificación Centrada en la Persona (PCP)"> Planificación Centrada en la Persona (PCP)</label>
+          <label class="opcion"><input type="checkbox" name="metodos_pv[]" value="Planes de apoyo individualizados"> Planes de apoyo individualizados</label>
+          <label class="opcion"><input type="checkbox" name="metodos_pv[]" value="Reuniones periódicas con la persona y su red"> Reuniones periódicas con la persona y su red</label>
+          <label class="opcion"><input type="checkbox" name="metodos_pv[]" value="Herramientas de autoconocimiento y toma de decisiones"> Herramientas de autoconocimiento y toma de decisiones</label>
+          <label class="opcion"><input type="checkbox" name="metodos_pv[]" value="Acompañamiento en recursos comunitarios"> Acompañamiento en recursos comunitarios</label>
+          <label class="opcion"><input type="checkbox" name="metodos_pv[]" value="No tenemos un sistema estructurado"> No tenemos un sistema estructurado</label>
+        </div>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">5</span>¿Qué dificultades encontráis con más frecuencia al apoyar la toma de decisiones? <em>(marca hasta 3)</em></label>
+        <div class="opciones-col">
+          <label class="opcion"><input type="checkbox" name="dificultades_td[]" value="La persona tiene pocas oportunidades reales de decidir"> La persona tiene pocas oportunidades reales de decidir en su entorno</label>
+          <label class="opcion"><input type="checkbox" name="dificultades_td[]" value="Las familias tienden a decidir en lugar de la persona"> Las familias tienden a decidir en lugar de la persona</label>
+          <label class="opcion"><input type="checkbox" name="dificultades_td[]" value="Falta de herramientas accesibles para expresar preferencias"> Falta de herramientas accesibles para expresar preferencias</label>
+          <label class="opcion"><input type="checkbox" name="dificultades_td[]" value="Dificultad para mantener la continuidad del proceso"> Dificultad para mantener la continuidad del proceso</label>
+          <label class="opcion"><input type="checkbox" name="dificultades_td[]" value="Escasa coordinación entre los distintos apoyos"> Escasa coordinación entre los distintos apoyos</label>
+          <label class="opcion"><input type="checkbox" name="dificultades_td[]" value="Falta de tiempo y recursos en la entidad"> Falta de tiempo y recursos en la entidad</label>
+        </div>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">6</span>¿Cómo registráis actualmente los objetivos personales y el progreso de cada persona?</label>
+        <select name="registro_objetivos">
+          <option value="">Selecciona...</option>
+          <option>Documentos Word o Excel propios</option>
+          <option>Software de gestión de casos</option>
+          <option>Plataforma digital especializada</option>
+          <option>Registro en papel</option>
+          <option>No tenemos un sistema de registro sistemático</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">7</span>¿Con qué frecuencia revisáis el proyecto de vida con cada persona?</label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="radio" name="frecuencia_revision" value="Semanalmente"> Semanalmente</label>
+          <label class="opcion"><input type="radio" name="frecuencia_revision" value="Mensualmente"> Mensualmente</label>
+          <label class="opcion"><input type="radio" name="frecuencia_revision" value="Cada 3-6 meses"> Cada 3-6 meses</label>
+          <label class="opcion"><input type="radio" name="frecuencia_revision" value="Anualmente"> Anualmente</label>
+          <label class="opcion"><input type="radio" name="frecuencia_revision" value="Sin frecuencia establecida"> Sin frecuencia establecida</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- S3: PARTICIPACIÓN COMUNITARIA -->
+    <div class="seccion">
+      <div class="seccion-titulo">🤝 Sección 3 · Participación comunitaria y redes de apoyo</div>
+      <div class="pregunta">
+        <label><span class="num">8</span>¿Cuáles son las principales barreras para que las personas participen en su comunidad? <em>(marca hasta 3)</em></label>
+        <div class="opciones-col">
+          <label class="opcion"><input type="checkbox" name="barreras_comunidad[]" value="Falta de actividades adaptadas en el entorno"> Falta de actividades adaptadas en el entorno</label>
+          <label class="opcion"><input type="checkbox" name="barreras_comunidad[]" value="Dependencia del transporte o acompañamiento"> Dependencia del transporte o acompañamiento</label>
+          <label class="opcion"><input type="checkbox" name="barreras_comunidad[]" value="Actitudes del entorno social poco inclusivas"> Actitudes del entorno social poco inclusivas</label>
+          <label class="opcion"><input type="checkbox" name="barreras_comunidad[]" value="Poca motivación o miedo a lo desconocido"> Poca motivación o miedo a lo desconocido</label>
+          <label class="opcion"><input type="checkbox" name="barreras_comunidad[]" value="Dificultades económicas"> Dificultades económicas</label>
+          <label class="opcion"><input type="checkbox" name="barreras_comunidad[]" value="Desconexión entre recursos existentes y necesidades reales"> Desconexión entre recursos existentes y necesidades reales</label>
+        </div>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">9</span>¿Cómo implicáis a las familias en el proceso de apoyo a la autonomía? <em>(puedes marcar varios)</em></label>
+        <div class="opciones-col">
+          <label class="opcion"><input type="checkbox" name="implicacion_familias[]" value="Reuniones periódicas con la familia"> Reuniones periódicas con la familia</label>
+          <label class="opcion"><input type="checkbox" name="implicacion_familias[]" value="Formación o talleres para familias"> Formación o talleres para familias</label>
+          <label class="opcion"><input type="checkbox" name="implicacion_familias[]" value="Canal de comunicación directo con la entidad"> Canal de comunicación directo con la entidad</label>
+          <label class="opcion"><input type="checkbox" name="implicacion_familias[]" value="Las familias participan en la elaboración del proyecto de vida"> Las familias participan en la elaboración del proyecto de vida</label>
+          <label class="opcion"><input type="checkbox" name="implicacion_familias[]" value="La implicación familiar es escasa o difícil de conseguir"> La implicación familiar es escasa o difícil de conseguir</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- S4: TECNOLOGÍA -->
+    <div class="seccion">
+      <div class="seccion-titulo">💻 Sección 4 · Tecnología y herramientas digitales</div>
+      <div class="pregunta">
+        <label><span class="num">10</span>¿Qué herramientas digitales utilizáis actualmente en vuestro trabajo? <em>(puedes marcar varios)</em></label>
+        <div class="opciones-grid">
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="Hojas Excel o similares"> Hojas Excel o similares</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="Software de gestión de casos"> Software de gestión de casos</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="App específica para DI"> App específica para DI</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="Herramientas de comunicación aumentativa"> Herramientas de comunicación aumentativa</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="No usamos herramientas digitales específicas"> No usamos herramientas digitales específicas</label>
+          <label class="opcion"><input type="checkbox" name="herramientas[]" value="Otro"> Otro</label>
+        </div>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">11</span>¿En qué áreas crees que la tecnología podría aportar más valor en vuestro trabajo? <em>(marca hasta 3)</em></label>
+        <div class="opciones-col">
+          <label class="opcion"><input type="checkbox" name="valor_tecnologia[]" value="Registro y seguimiento del proyecto de vida"> Registro y seguimiento del proyecto de vida</label>
+          <label class="opcion"><input type="checkbox" name="valor_tecnologia[]" value="Apoyo a la toma de decisiones de la persona"> Apoyo a la toma de decisiones de la persona</label>
+          <label class="opcion"><input type="checkbox" name="valor_tecnologia[]" value="Comunicación entre la persona, familia y entidad"> Comunicación entre la persona, familia y entidad</label>
+          <label class="opcion"><input type="checkbox" name="valor_tecnologia[]" value="Motivación y gamificación de objetivos personales"> Motivación y gamificación de objetivos personales</label>
+          <label class="opcion"><input type="checkbox" name="valor_tecnologia[]" value="Visibilidad del progreso para la propia persona"> Visibilidad del progreso para la propia persona</label>
+          <label class="opcion"><input type="checkbox" name="valor_tecnologia[]" value="Generación de informes para financiadores o administración"> Generación de informes para financiadores o administración</label>
+        </div>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">12</span>¿Qué nivel de autonomía digital tienen habitualmente las personas con DI con las que trabajáis?</label>
+        <div class="opciones-col">
+          <label class="opcion"><input type="radio" name="autonomia_digital" value="La mayoría usan el móvil o tablet de forma autónoma"> La mayoría usan el móvil o tablet de forma autónoma</label>
+          <label class="opcion"><input type="radio" name="autonomia_digital" value="La mayoría necesitan algo de ayuda para usarlo"> La mayoría necesitan algo de ayuda para usarlo</label>
+          <label class="opcion"><input type="radio" name="autonomia_digital" value="La mayoría necesitan acompañamiento constante"> La mayoría necesitan acompañamiento constante</label>
+          <label class="opcion"><input type="radio" name="autonomia_digital" value="Es muy variable según la persona"> Es muy variable según la persona</label>
+        </div>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">13</span>¿En qué medida crees que una herramienta digital bien diseñada podría apoyar el proceso de autodeterminación? <em>(1 = Nada · 5 = Mucho)</em></label>
+        <div class="escala-likert">
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="1"><label>1<br>Nada</label></div>
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="2"><label>2</label></div>
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="3"><label>3<br>Algo</label></div>
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="4"><label>4</label></div>
+          <div class="likert-item"><input type="radio" name="utilidad_app" value="5"><label>5<br>Mucho</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S5: TU VOZ -->
+    <div class="seccion">
+      <div class="seccion-titulo">💬 Sección 5 · Tu voz</div>
+      <div class="pregunta">
+        <label><span class="num">14</span>¿Qué debería tener sí o sí una herramienta digital para ser útil en vuestro trabajo?</label>
+        <textarea name="imprescindible" placeholder="Cuéntanos qué es imprescindible para ti..."></textarea>
+      </div>
+      <div class="pregunta">
+        <label><span class="num">15</span>Si quieres que te contactemos, deja tu correo <em>(opcional)</em></label>
+        <input type="email" name="email_contacto" placeholder="tu@correo.com">
+      </div>
+    </div>
+
+    <div class="error-msg" id="error-msg">⚠️ Algo ha ido mal al enviar. Por favor, inténtalo de nuevo en unos segundos.</div>
+    <button type="submit" class="btn-enviar" id="btn-submit">Enviar mis respuestas 🐼</button>
+    <p class="nota-privacidad">🔒 Respuestas anónimas y confidenciales · Solo uso investigación · © 2026 La Panda · Alba Sánchez Guerrero</p>
+  </form>
+
+  <div class="agradecimiento" id="gracias">
+    <div class="icono">🐼</div>
+    <h2>¡Muchas gracias!</h2>
+    <p>Tu experiencia y conocimiento son fundamentales para construir una herramienta que realmente marque la diferencia.<br><br>En equipo llegamos más lejos. 💚</p>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('form-apoyo-autonomia');
+  const btn = document.getElementById('btn-submit');
+  const gracias = document.getElementById('gracias');
+
+  const iframe = document.createElement('iframe');
+  iframe.name = 'hidden-iframe';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+  form.target = 'hidden-iframe';
+
+  iframe.addEventListener('load', function() {
+    form.style.display = 'none';
+    gracias.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  form.addEventListener('submit', function() {
+    btn.disabled = true;
+    btn.textContent = 'Enviando... 🐼';
+  });
+</script>
+</body>
+</html>
