@@ -260,6 +260,8 @@
   const btn = document.getElementById('btn-submit');
   const gracias = document.getElementById('gracias');
 
+  let formEnviado = false;
+
   const iframe = document.createElement('iframe');
   iframe.name = 'hidden-iframe';
   iframe.style.display = 'none';
@@ -267,12 +269,14 @@
   form.target = 'hidden-iframe';
 
   iframe.addEventListener('load', function() {
+    if (!formEnviado) return;
     form.style.display = 'none';
     gracias.style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   form.addEventListener('submit', function() {
+    formEnviado = true;
     btn.disabled = true;
     btn.textContent = 'Enviando... 🐼';
   });
